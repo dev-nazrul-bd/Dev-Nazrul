@@ -1,6 +1,7 @@
 import React from "react";
 import { Project } from "../types";
 import { ExternalLink, Smartphone, Globe, Layers, ArrowUpRight } from "lucide-react";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 interface ProjectCardProps {
   key?: any;
@@ -10,13 +11,20 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, onSelection }: ProjectCardProps) {
   const isApp = project.category === "App";
+  const [ref, isVisible] = useIntersectionObserver();
 
   return (
     <div
-      id={`project-card-${project.id || "temp"}`}
-      className="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden hover:border-indigo-500/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/5 transition-all duration-300 flex flex-col h-full text-slate-100 cursor-pointer"
-      onClick={() => onSelection(project)}
+      ref={ref as any}
+      className={`transition-all duration-700 ease-out transform ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
     >
+      <div
+        id={`project-card-${project.id || "temp"}`}
+        className="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden hover:border-indigo-500/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/5 transition-all duration-300 flex flex-col h-full text-slate-100 cursor-pointer"
+        onClick={() => onSelection(project)}
+      >
       {/* Cloudinary Image Frame with Hover Zoom */}
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-950 border-b border-slate-800">
         <img
@@ -91,6 +99,7 @@ export default function ProjectCard({ project, onSelection }: ProjectCardProps) 
           </span>
         </div>
       </div>
+    </div>
     </div>
   );
 }

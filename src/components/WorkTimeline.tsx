@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Briefcase, Calendar, Star, Milestone, Award, Circle } from "lucide-react";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 interface TimelineMilestone {
   year: string;
@@ -12,6 +13,7 @@ interface TimelineMilestone {
 
 export default function WorkTimeline() {
   const [selectedMilestone, setSelectedMilestone] = useState<number>(0);
+  const [ref, isVisible] = useIntersectionObserver();
 
   const milestones: TimelineMilestone[] = [
     {
@@ -65,7 +67,11 @@ export default function WorkTimeline() {
   ];
 
   return (
-    <div id="work-timeline-section" className="relative bg-slate-900/40 border border-slate-900 rounded-3xl p-6 sm:p-8 space-y-6">
+    <div 
+      ref={ref as any}
+      id="work-timeline-section" 
+      className="relative bg-slate-900/40 border border-slate-900 rounded-3xl p-6 sm:p-8 space-y-6 overflow-hidden"
+    >
       
       {/* Background decoration */}
       <div className="absolute top-12 left-10 w-48 h-48 bg-emerald-505/5 rounded-full blur-2xl pointer-events-none" />
@@ -83,7 +89,9 @@ export default function WorkTimeline() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-4">
         {/* Left Side: Milestones selection buttons (vertical rail) */}
-        <div className="lg:col-span-4 space-y-2 flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible pb-3 lg:pb-0 scrollbar-none gap-2">
+        <div className={`lg:col-span-4 space-y-2 flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible pb-3 lg:pb-0 scrollbar-none gap-2 transition-all duration-700 ease-out transform ${
+          isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-y-4 lg:-translate-y-0 lg:-translate-x-12"
+        }`}>
           {milestones.map((ms, index) => {
             const isSelected = selectedMilestone === index;
             return (
@@ -109,7 +117,9 @@ export default function WorkTimeline() {
         </div>
 
         {/* Right Side: Showcase values details */}
-        <div className="lg:col-span-8 bg-slate-950/60 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-6">
+        <div className={`lg:col-span-8 bg-slate-950/60 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-6 transition-all duration-700 delay-150 ease-out transform ${
+          isVisible ? "opacity-100 translate-y-0 text-slate-100" : "opacity-0 translate-y-12 text-slate-100"
+        }`}>
           <div className="space-y-4">
             {/* Header metadata */}
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 border-b border-slate-900 pb-4">

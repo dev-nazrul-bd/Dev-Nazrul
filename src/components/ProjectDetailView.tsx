@@ -173,53 +173,53 @@ export default function ProjectDetailView({ project, onBack }: ProjectDetailView
               </div>
             )}
 
-            {/* Screenshots Gallery Section (Up to 5 screenshots) */}
+            {/* Screenshots Gallery Section (Google Play Store Style) */}
             <div className="space-y-4">
               <span className="text-[10px] uppercase font-mono tracking-wider text-indigo-400 font-extrabold block">
                 {project.screenshots && project.screenshots.length > 0 
-                  ? `Visual Screenshots (${project.screenshots.length} available)` 
+                  ? "Project Screenshots (Click to Expand)" 
                   : "Showcase Image Preview"}
               </span>
               
-              {/* Main Screenshot Viewport (Click-to-Fullscreen) */}
-              <div 
-                className="aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-850 shadow-xl relative group cursor-zoom-in"
-                onClick={() => setFullscreenImage(activeScreenshot)}
-              >
-                <img
-                  src={activeScreenshot}
-                  alt={`${project.title} active screen`}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-350"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                  <div className="px-4 py-2 bg-slate-950/80 rounded-xl border border-slate-800 text-xs text-indigo-400 font-mono tracking-wider uppercase shadow-xl flex items-center gap-1.5 animate-pulse">
-                    <Eye className="w-4 h-4" /> Click to view full screen
-                  </div>
-                </div>
-              </div>
-
-              {/* Individual clickable thumbnail rows, displayed only if project.screenshots has urls */}
-              {project.screenshots && project.screenshots.length > 0 && (
-                <div className="grid grid-cols-5 gap-3.5 pt-1">
+              {project.screenshots && project.screenshots.length > 0 ? (
+                <div className="flex gap-4 overflow-x-auto pb-4 pt-1 snap-x scrollbar-thin scrollbar-track-slate-950 scrollbar-thumb-indigo-900/40 select-none">
                   {project.screenshots.map((screen, idx) => (
-                    <button
+                    <div
                       key={idx}
-                      onClick={() => setActiveScreenshot(screen)}
-                      className={`aspect-[16/10] rounded-xl overflow-hidden border transition-all cursor-pointer bg-slate-900 ${
-                        activeScreenshot === screen
-                          ? "border-indigo-500 ring-2 ring-indigo-500/20 scale-[1.03]"
-                          : "border-slate-800 opacity-60 hover:opacity-100"
-                      }`}
+                      className="w-[170px] sm:w-[210px] flex-shrink-0 aspect-[9/16] rounded-2xl border border-slate-800/80 overflow-hidden bg-slate-900 shadow-xl relative group cursor-zoom-in snap-start hover:border-indigo-550 transition-all duration-300"
+                      onClick={() => setFullscreenImage(screen)}
                     >
                       <img
                         src={screen}
                         alt={`Screenshot ${idx + 1}`}
                         referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                       />
-                    </button>
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                        <span className="px-2.5 py-1 bg-slate-950/80 rounded-lg text-[10px] font-mono tracking-wider text-indigo-400 border border-slate-800 uppercase shadow-xl animate-pulse">
+                          Zoom In
+                        </span>
+                      </div>
+                    </div>
                   ))}
+                </div>
+              ) : (
+                /* Main Screenshot Viewport (Click-to-Fullscreen) */
+                <div 
+                  className="aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-850 shadow-xl relative group cursor-zoom-in"
+                  onClick={() => setFullscreenImage(activeScreenshot)}
+                >
+                  <img
+                    src={activeScreenshot}
+                    alt={`${project.title} active screen`}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-350"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <div className="px-4 py-2 bg-slate-950/80 rounded-xl border border-slate-800 text-xs text-indigo-400 font-mono tracking-wider uppercase shadow-xl flex items-center gap-1.5 animate-pulse">
+                      <Eye className="w-4 h-4" /> Click to view full screen
+                    </div>
+                  </div>
                 </div>
               )}
             </div>

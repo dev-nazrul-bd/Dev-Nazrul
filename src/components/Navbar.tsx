@@ -208,8 +208,8 @@ export default function Navbar({ currentView, setView, isAdmin, onLogout, theme,
               </a>
             </div>
 
-            {/* Admin toggle shown ONLY if user is already logged in or visiting admin directly */}
-            {(isAdmin || currentView === "admin") && (
+            {/* Admin toggle shown ONLY if visiting admin directly */}
+            {currentView === "admin" && (
               <>
                 <div className="h-6 w-px bg-slate-800 mx-3" />
                 <button
@@ -321,7 +321,7 @@ export default function Navbar({ currentView, setView, isAdmin, onLogout, theme,
               </button>
             );
           })}
-          {(isAdmin || currentView === "admin") && (
+          {currentView === "admin" && (
             <>
               <div className="h-px bg-slate-800 my-2" />
               <button
