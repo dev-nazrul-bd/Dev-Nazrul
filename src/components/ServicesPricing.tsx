@@ -92,7 +92,7 @@ export default function ServicesPricing() {
     }
   }, [service, pagesCount, dbAddon, adminAddon, securityAddon, rates]);
 
-  const handleWhatsAppRoute = () => {
+  const handleEmailProposalRoute = () => {
     const serviceLabels: Record<ServiceType, string> = {
       web: "Full-Stack Web Application (Next.js / React)",
       android: "Native Android Mobile App (Kotlin / React Native)",
@@ -113,7 +113,7 @@ Estimated Quote: BDT ৳${costText.toLocaleString()}
 Please let me know your availability to discuss further!`;
 
     const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/8801793840762?text=${encoded}`, "_blank", "noopener,noreferrer");
+    window.open(`mailto:dev.nazrul.bd@gmail.com?subject=Collaborative%20Budget%20Proposal%20-%20Dev%20Nazrul&body=${encoded}`, "_self");
   };
 
   return (
@@ -297,10 +297,10 @@ Please let me know your availability to discuss further!`;
               </div>
             </div>
             <button
-              onClick={handleWhatsAppRoute}
-              className="flex items-center gap-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-lg transition-all text-[11px] uppercase tracking-wide cursor-pointer font-mono"
+              onClick={handleEmailProposalRoute}
+              className="flex items-center gap-1.5 bg-indigo-650 hover:bg-indigo-600 text-white font-bold px-4 py-2.5 rounded-lg transition-all text-[11px] uppercase tracking-wide cursor-pointer font-mono shadow-lg shadow-indigo-600/20"
             >
-              WhatsApp Hire <ChevronRight className="w-3.5 h-3.5" />
+              Email Proposal <ChevronRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>

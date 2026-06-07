@@ -50,23 +50,15 @@ export default function Hero({ onExploreProjects, onContactMe }: HeroProps) {
               Highly passionate about crafting state-of-the-art secure single-page operations, high-performance dashboard analytics web apps, and native android application packages (APKs) with complex Cloud storage and database automations. Let's engineer your concepts.
             </p>
 
-            {/* Quick social & phone contacts */}
-            <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start text-xs sm:text-sm font-mono text-slate-400">
+            {/* Quick social & contact email (Highlighted) */}
+            <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start text-xs sm:text-sm font-mono">
               <a 
-                href="https://wa.me/8801793840762" 
-                target="_blank" 
-                rel="noreferrer"
-                className="flex items-center gap-2 hover:text-green-400 transition-colors bg-slate-900 border border-slate-800 p-2 rounded-lg"
+                href="mailto:dev.nazrul.bd@gmail.com" 
+                className="flex items-center gap-2.5 text-indigo-300 hover:text-indigo-200 transition-all bg-indigo-500/5 border border-indigo-500/30 hover:border-indigo-500/50 px-4.5 py-3 rounded-2xl ring-4 ring-indigo-500/10 hover:ring-indigo-500/20 shadow-lg shadow-indigo-500/5 text-slate-100 font-extrabold"
+                title="Primary Contact Email"
               >
-                <Phone className="w-4 h-4 text-green-500" />
-                <span>+8801793840762</span>
-              </a>
-              <a 
-                href="mailto:nazrul.islam.uli019@gmail.com" 
-                className="flex items-center gap-2 hover:text-indigo-400 transition-colors bg-slate-900 border border-slate-800 p-2 rounded-lg"
-              >
-                <Mail className="w-4 h-4 text-indigo-400" />
-                <span>nazrul.islam.uli019@gmail.com</span>
+                <Mail className="w-4.5 h-4.5 text-indigo-400 animate-pulse" />
+                <span>dev.nazrul.bd@gmail.com</span>
               </a>
             </div>
 

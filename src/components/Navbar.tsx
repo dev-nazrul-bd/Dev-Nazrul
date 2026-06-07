@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, ShieldAlert, Laptop, Briefcase, Phone, ChevronRight, Github, Facebook, Linkedin, MessageCircle, Landmark, Paintbrush, ChevronDown, Search } from "lucide-react";
+import { Menu, X, ShieldAlert, Laptop, Briefcase, Phone, ChevronRight, Github, Facebook, Linkedin, MessageCircle, Landmark, Paintbrush, ChevronDown, Search, Mail } from "lucide-react";
 import StylishLogo from "./StylishLogo";
 import { AVAILABLE_THEMES } from "../themes";
 
@@ -197,14 +197,12 @@ export default function Navbar({ currentView, setView, isAdmin, onLogout, theme,
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="https://wa.me/8801793840762"
-                target="_blank"
-                rel="noreferrer"
-                id="header-social-whatsapp"
-                className="w-8 h-8 rounded-lg bg-slate-800/40 hover:bg-slate-800 border border-slate-800 hover:border-emerald-500/30 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all"
-                title="WhatsApp Direct Msg"
+                href="mailto:dev.nazrul.bd@gmail.com"
+                id="header-social-email"
+                className="w-8 h-8 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-400 flex items-center justify-center text-indigo-400 hover:text-indigo-300 ring-2 ring-indigo-500/10 hover:ring-indigo-500/25 transition-all"
+                title="Primary Email Inquiries"
               >
-                <MessageCircle className="w-4 h-4" />
+                <Mail className="w-4 h-4" />
               </a>
             </div>
 

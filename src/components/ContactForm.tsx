@@ -41,6 +41,7 @@ export default function ContactForm() {
         email: formData.email,
         message: formData.message,
         createdAt: serverTimestamp(),
+        seen: false, // Mark newly saved messages as unseen by default
       });
 
       setSuccess(true);

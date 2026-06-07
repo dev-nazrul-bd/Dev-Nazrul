@@ -655,6 +655,27 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
     }
   };
 
+  // Mark message as seen/read
+  const handleMarkAsSeen = async (id: string) => {
+    setDbLoading(true);
+    setDbError("");
+    try {
+      await updateDoc(doc(db, "messages", id), {
+        seen: true
+      });
+      setDbSuccess("Message marked as read.");
+      fetchData();
+    } catch (err: any) {
+      try {
+        handleFirestoreError(err, OperationType.WRITE, `messages/${id}`);
+      } catch (processed) {
+        setDbError("Database rules rejected update.");
+      }
+    } finally {
+      setDbLoading(false);
+    }
+  };
+
   // Version Changelog additions
   const handleVersionSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -883,14 +904,27 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
 
         <button
           onClick={() => setActiveTab("messages")}
-          className={`px-4 py-3.5 rounded-xl text-xs sm:text-sm font-mono uppercase tracking-wide flex items-center gap-2 transition-all cursor-pointer ${
+          className={`px-4 py-3.5 rounded-xl text-xs sm:text-sm font-mono uppercase tracking-wide flex items-center gap-2 transition-all cursor-pointer relative ${
             activeTab === "messages"
               ? "bg-indigo-600 text-white shadow-lg"
               : "text-slate-400 hover:text-white"
           }`}
         >
-          <Inbox className="w-4 h-4" />
+          <div className="relative">
+            <Inbox className="w-4 h-4" />
+            {messages.some((msg) => msg.seen === false) && (
+              <span className="absolute -top-1.5 -right-1.5 flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+              </span>
+            )}
+          </div>
           Inquiries Inbox ({messages.length})
+          {messages.some((msg) => msg.seen === false) && (
+            <span className="ml-1 bg-rose-500 text-white text-[9px] px-1.5 py-0.5 rounded-full font-mono font-bold animate-pulse">
+              NEW
+            </span>
+          )}
         </button>
 
         <button
@@ -1403,10 +1437,19 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
           ) : (
             <div className="space-y-4">
               {messages.map((msg) => (
-                <div key={msg.id} className="bg-slate-900 border border-slate-850 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-slate-700 transition-all">
+                <div key={msg.id} className={`border rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all ${
+                  msg.seen === false 
+                    ? "bg-slate-900/90 border-rose-500/20 shadow-md shadow-rose-500/5 hover:border-rose-500/40" 
+                    : "bg-slate-905 border-slate-850 hover:border-slate-700"
+                }`}>
                   <div className="space-y-2 max-w-4xl">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs sm:text-sm">
-                      <span className="font-bold text-slate-100">{msg.name}</span>
+                      <span className="font-bold text-slate-100 flex items-center gap-1.5">
+                        {msg.name}
+                        {msg.seen === false && (
+                          <span className="inline-flex h-2.5 w-2.5 rounded-full bg-rose-500 ring-4 ring-rose-500/15 shadow-md animate-pulse" title="Unseen message" />
+                        )}
+                      </span>
                       <span className="text-indigo-400">{msg.email}</span>
                       <span className="text-slate-500 text-xs">
                         Submitted: {msg.createdAt?.toDate ? msg.createdAt.toDate().toLocaleString() : new Date().toLocaleString()}
@@ -1417,13 +1460,26 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
                     </p>
                   </div>
 
-                  <button
-                    onClick={() => handleDeleteMessage(msg.id!)}
-                    className="p-2.5 rounded-xl text-rose-500 bg-rose-500/10 hover:bg-rose-500 hover:text-white border border-rose-500/20 hover:border-rose-500/30 transition-all cursor-pointer inline-flex items-center self-end md:self-center"
-                    title="Delete message"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                  <div className="flex items-center gap-2.5 self-end md:self-center">
+                    {msg.seen === false && (
+                      <button
+                        onClick={() => handleMarkAsSeen(msg.id!)}
+                        className="px-3 py-1.5 rounded-lg text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500 hover:text-slate-950 border border-emerald-500/25 hover:border-emerald-500/40 transition-all cursor-pointer inline-flex items-center gap-1 text-xs font-mono font-bold"
+                        title="Mark as read"
+                      >
+                        <Check className="w-3.5 h-3.5" />
+                        <span>Read</span>
+                      </button>
+                    )}
+                    
+                    <button
+                      onClick={() => handleDeleteMessage(msg.id!)}
+                      className="p-2 rounded-lg text-rose-500 bg-rose-500/10 hover:bg-rose-500 hover:text-white border border-rose-500/20 hover:border-rose-500/30 transition-all cursor-pointer inline-flex items-center"
+                      title="Delete message"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

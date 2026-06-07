@@ -49,15 +49,15 @@ export default function AIAssistant() {
           "💼 **১. রিয়াক্ট/নেক্সট ওয়েব ডেভেলপমেন্ট (Web Apps)**: খরচ শুরু মাত্র **৳১২,০০০ BDT** থেকে।\n" +
           "📱 **২. নেটিভ অ্যান্ড্রয়েড আইওটি (Android & BLE IoT)**: খরচ শুরু মাত্র **৳১৬,০৫০ BDT** থেকে। (ব্লুটুথ BLE ও সেন্সর রিডিং সহ)\n" +
           "🔒 **৩. ব্যাকএন্ড এপিআই ও সিকিউরিটি অডিট**: খরচ শুরু মাত্র **৳৮,০০০ BDT** থেকে।\n\n" +
-          "আপনি চাইলে এই ওয়েবসাইটের **Live Budget Calculator** ব্যবহার করে আপনার পছন্দমতো মডিউল যোগ-বিয়োগ করে ইনস্ট্যান্ট হিসাব দেখে নিতে পারেন। অথবা সরাসরি আলাপ করতে ওনারটি WhatsApp-এ নক করতে পারেন:\n" +
-          "👉 [+৮৮০১৭৯৩৮৪০৭৬২](https://wa.me/8801793840762)";
+          "আপনি চাইলে এই ওয়েবসাইটের **Live Budget Calculator** ব্যবহার করে আপনার পছন্দমতো মডিউল যোগ-বিয়োগ করে ইনস্ট্যান্ট হিসাব দেখে নিতে পারেন। অথবা সরাসরি যোগাযোগ করতে ইমেইল করতে পারেন:\n" +
+          "👉 [dev.nazrul.bd@gmail.com](mailto:dev.nazrul.bd@gmail.com)";
       } else {
         return "Md. Nazrul Islam offers highly competitive and transparent tier systems:\n\n" +
           "💼 **1. React / Next.js Web Portals**: Starting from **৳12,000 BDT**.\n" +
           "📱 **2. Kotlin Native Android Apps**: Starting from **৳16,050 BDT** (Includes BLE tracking & custom state managers).\n" +
           "🔒 **3. Back-end APIs & Rules Auditing**: Starting from **৳8,000 BDT**.\n\n" +
-          "You can try the **Live Budget Calculator** directly on this site to sum up features of interest! Or contact him directly on WhatsApp:\n" +
-          "👉 [+8801793840762](https://wa.me/8801793840762)";
+          "You can try the **Live Budget Calculator** directly on this site to sum up features of interest! Or send a direct email inquiry:\n" +
+          "👉 [dev.nazrul.bd@gmail.com](mailto:dev.nazrul.bd@gmail.com)";
       }
     }
 
@@ -106,16 +106,14 @@ export default function AIAssistant() {
       text.includes("কন্টাক্ট")
     ) {
       if (isBengali) {
-        return "মোঃ নজরুল ইসলামের সাথে সরাসরি নিচে দেওয়া মাধ্যমগুলো দিয়ে যোগাযোগ করতে পারেন:\n\n" +
-          "💬 **WhatsApp**: [+৮৮০১৭৯৩৮৪০৭৬২](https://wa.me/8801793840762) (সবচেয়ে দ্রুত রেসপন্স ও ফ্রি কনসাল্টেশনের জন্য উপযুক্ত)\n" +
-          "📧 **ইমেইল**: nazrul.islam.uli019@gmail.com\n" +
+        return "মোঃ নজরুল ইসলামের সাথে সরাসরি নিচে দেওয়া ইমেইল ঠিকানায় যোগাযোগ করতে পারেন:\n\n" +
+          "📧 **ইমেইল**: [dev.nazrul.bd@gmail.com](mailto:dev.nazrul.bd@gmail.com) (যোগাযোগের জন্য সবচেয়ে বেশি সাজেস্টেড ও হাইলাইটেড মাধ্যম)\n" +
           "💻 **GitHub**: [github.com/dev-nazrul-bd](https://github.com/dev-nazrul-bd)\n" +
           "📍 **বর্তমান অবস্থান**: বাংলাদেশ (রিমোটলি গ্লোবাল কাজ করেন)।\n\n" +
-          "যেকোনো প্রজেক্ট আলোচনার জন্য নির্দ্বিধায় মেসেজ দিতে পারেন!";
+          "যেকোনো প্রজেক্ট আলোচনার জন্য নির্দ্বিধায় ইমেইল পাঠান বা এই সাইটের কন্টাক্ট ফর্ম পূরণ করুন!";
       } else {
         return "You can get in touch with Md. Nazrul Islam immediately:\n\n" +
-          "💬 **WhatsApp**: [+8801793840762](https://wa.me/8801793840762) (Highly recommended for rapid, direct consultation)\n" +
-          "📧 **Email**: nazrul.islam.uli019@gmail.com\n" +
+          "📧 **Email**: [dev.nazrul.bd@gmail.com](mailto:dev.nazrul.bd@gmail.com) (Highly recommended highlighted primary contact)\n" +
           "💻 **GitHub profile**: [github.com/dev-nazrul-bd](https://github.com/dev-nazrul-bd)\n" +
           "📍 **Location**: Bangladesh (Available for remote contracts globally).";
       }
@@ -176,13 +174,13 @@ export default function AIAssistant() {
         "আপনার জিজ্ঞাসাটি ওনার জন্য অত্যন্ত মূল্যবান। সংক্ষেপে ওনার প্রধান সেবাগুলো নিচে দেখুন:\n\n" +
         "🛠️ **মূল স্পেশালিটি**: রেসপন্সিভ Next.js ওয়েব পোর্টাল ও Kotlin অ্যান্ড্রয়েড আইওটি (Agro/Soil sensors, BLE) পোর্টাল।\n" +
         "💳 **বাজেট**: কাস্টম ওয়েবসাইট ডিজাইন ১২,০০০ টাকা ও কোটলিন মোবাইল অ্যাপস ১৬,০৫০ টাকা থেকে শুরু।\n" +
-        "📞 **সহজ চ্যাট**: আরো ক্লিয়ার আলোচনার জন্য ওনার সাথে সরাসরি লিঙ্ক বা হোয়াটসঅ্যাপে নক দিতে পারেন: [+৮৮০১৭৯৩৮৪০৭৬২](https://wa.me/8801793840762)";
+        "📞 **সহজ চ্যাট**: আরো ক্লিয়ার আলোচনার জন্য ওনার সাথে সরাসরি ইমেইলে যোগাযোগ করতে পারেন: [dev.nazrul.bd@gmail.com](mailto:dev.nazrul.bd@gmail.com)";
     } else {
       return "I am Md. Nazrul's Portfolio Partner. Thank you for your message!\n\n" +
         "To quickly guide your exploration, here are high-quality highlights of Nazrul's services:\n\n" +
         "🛠️ **Fields of Practice**: Responsive fullstack Next.js client systems, Kotlin Native Android APKs, and Embedded BLE agricultural logging telemetry.\n" +
         "💳 **Pricing**: Dynamic websites starting at ৳12,000 BDT, mobile systems at ৳16,050 BDT.\n" +
-        "📞 **Direct Support**: Message him on WhatsApp anytime to discuss your specs: [+8801793840762](https://wa.me/8801793840762)! Our team will reply shortly.";
+        "📞 **Direct Support**: Message him on his highlighted email address directly to discuss your specs: [dev.nazrul.bd@gmail.com](mailto:dev.nazrul.bd@gmail.com)! He will respond shortly.";
     }
   };
 

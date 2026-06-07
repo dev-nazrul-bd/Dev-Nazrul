@@ -195,7 +195,7 @@ export default function ProjectDetailView({ project, onBack }: ProjectDetailView
             {project.screenshots && project.screenshots.length > 0 && (
               <div className="space-y-2">
                 <span className="text-[10px] uppercase font-mono tracking-wider text-indigo-400 font-extrabold block">
-                  Project Screenshots 
+                  Project Screenshots (Height: 1.5")
                 </span>
                 <div className="flex gap-3 overflow-x-auto pb-3 pt-1 snap-x scrollbar-thin scrollbar-track-slate-950 scrollbar-thumb-indigo-900/40 select-none">
                   {project.screenshots.map((screen, idx) => (

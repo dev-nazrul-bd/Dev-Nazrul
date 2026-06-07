@@ -617,8 +617,8 @@ export default function App() {
             <div className="space-y-1.5">
               <span className="font-sans font-bold text-slate-100 text-base block leading-none">Md. Nazrul Islam</span>
               <p className="text-xs text-slate-400 block font-sans">Full-stack Software & Android Developer</p>
-              <p className="text-[10px] text-slate-505 block leading-normal pt-1 break-all max-w-sm">
-                Inquiries: <a href="mailto:nazrul.islam.uli019@gmail.com" className="text-indigo-400 hover:underline">nazrul.islam.uli019@gmail.com</a>
+              <p className="text-[10px] text-indigo-400 block leading-normal pt-1 break-all max-w-sm">
+                Inquiries: <a href="mailto:dev.nazrul.bd@gmail.com" className="bg-indigo-500/10 border border-indigo-500/30 px-2.5 py-1 rounded-md text-indigo-350 hover:text-indigo-200 transition-all font-bold">dev.nazrul.bd@gmail.com</a>
               </p>
             </div>
 
@@ -639,7 +639,7 @@ export default function App() {
                 rel="noreferrer" 
                 className="hover:text-indigo-405 transition-colors inline-flex items-center gap-1.5 font-sans font-medium text-slate-300 hover:underline"
               >
-                <Linkedin className="w-3.5 h-3.5 text-indigo-450" />
+                <Linkedin className="w-3.5 h-3.5 text-indigo-455" />
                 LinkedIn
               </a>
               <a 
@@ -651,16 +651,6 @@ export default function App() {
                 <Facebook className="w-3.5 h-3.5 text-indigo-400" />
                 Facebook
               </a>
-              <a 
-                href="https://wa.me/8801793840762" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="hover:text-emerald-450 transition-colors inline-flex items-center gap-1.5 font-sans font-medium text-slate-300 hover:underline"
-              >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-450" />
-                WhatsApp
-              </a>
-              
             </div>
           </div>
 

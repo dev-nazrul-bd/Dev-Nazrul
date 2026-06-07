@@ -27,4 +27,5 @@ export interface Message {
   email: string;
   message: string;
   createdAt: any; // Firestore Timestamp
+  seen?: boolean;
 }
