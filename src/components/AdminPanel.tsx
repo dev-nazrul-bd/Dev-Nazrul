@@ -880,6 +880,7 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
           onClick={() => {
             setActiveTab("add");
             setEditingProject(null);
+            setScreenshotFiles([null, null, null, null, null]);
             setProjectForm({
               title: "",
               description: "",
@@ -890,6 +891,11 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
               liveLink: "",
               apkLink: "",
               guide: "",
+              screenshot1: "",
+              screenshot2: "",
+              screenshot3: "",
+              screenshot4: "",
+              screenshot5: "",
             });
           }}
           className={`px-4 py-3.5 rounded-xl text-xs sm:text-sm font-mono uppercase tracking-wide flex items-center gap-2 transition-all cursor-pointer ${
@@ -1938,6 +1944,7 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
   // Small helpers inside UI bounds to resolve conditional triggers
   function handleEditEditInit(project: Project) {
     setEditingProject(project);
+    setScreenshotFiles([null, null, null, null, null]);
     setProjectForm({
       title: project.title,
       description: project.description,
@@ -1948,6 +1955,11 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
       liveLink: project.liveLink || "",
       apkLink: project.apkLink || "",
       guide: project.guide || "",
+      screenshot1: project.screenshots?.[0] || "",
+      screenshot2: project.screenshots?.[1] || "",
+      screenshot3: project.screenshots?.[2] || "",
+      screenshot4: project.screenshots?.[3] || "",
+      screenshot5: project.screenshots?.[4] || "",
     });
     setActiveTab("add");
   }
