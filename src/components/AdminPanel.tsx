@@ -1018,14 +1018,14 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
                               placeholder="1.0.2"
                               value={versionForm.version}
                               onChange={(e) => setVersionForm({ ...versionForm, version: e.target.value })}
-                              className="bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs outline-none text-white font-mono"
+                              className="bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs outline-none text-slate-100 placeholder-slate-500 font-mono"
                             />
                             <input
                               type="date"
                               required
                               value={versionForm.date}
                               onChange={(e) => setVersionForm({ ...versionForm, date: e.target.value })}
-                              className="bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs outline-none text-white font-mono"
+                              className="bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs outline-none text-slate-100 font-mono"
                             />
                           </div>
                           <textarea
@@ -1034,7 +1034,7 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
                             value={versionForm.changes}
                             onChange={(e) => setVersionForm({ ...versionForm, changes: e.target.value })}
                             rows={2}
-                            className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs outline-none text-white resize-none"
+                            className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs outline-none text-slate-100 placeholder-slate-500 resize-none"
                           />
                           <div className="flex gap-2">
                             <button
@@ -1341,18 +1341,34 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                           {/* File upload prompt */}
-                          <label className="border border-dashed border-slate-800 hover:border-indigo-500/30 rounded-xl p-4 text-center cursor-pointer block bg-slate-900/40 hover:bg-slate-900 transition-all">
-                            <UploadCloud className="w-5 h-5 text-indigo-400 mx-auto mb-1" />
-                            <span className="text-[11px] text-slate-300 block font-bold">Upload screenshot {num}</span>
-                            <span className="text-[9px] text-indigo-400 block font-mono mt-0.5">Click to browse file</span>
-                            <input
-                              type="file"
-                              accept="image/*"
-                              onChange={(e) => handleScreenshotFileChange(idx, e)}
-                              disabled={isUploading}
-                              className="hidden"
-                            />
-                          </label>
+                          <div className="space-y-1.5">
+                            <label className="border border-dashed border-slate-800 hover:border-indigo-500/30 rounded-xl p-3 text-center cursor-pointer block bg-slate-900/40 hover:bg-slate-900 transition-all">
+                              <UploadCloud className="w-5 h-5 text-indigo-400 mx-auto mb-1" />
+                              <span className="text-[11px] text-slate-300 block font-bold">Upload screenshot {num}</span>
+                              <span className="text-[9px] text-indigo-400 block font-mono mt-0.5">Click to browse file</span>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => handleScreenshotFileChange(idx, e)}
+                                disabled={isUploading}
+                                className="hidden"
+                              />
+                            </label>
+                            
+                            {selectedFile && (
+                              <div className="text-[9px] text-indigo-300 font-mono flex items-center gap-1 bg-indigo-950/20 px-2 py-1 rounded border border-indigo-900/10">
+                                <Check className="w-2.5 h-2.5 text-emerald-400" />
+                                <span className="truncate">File: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)</span>
+                              </div>
+                            )}
+
+                            {isUploading && (
+                              <div className="flex items-center gap-1 text-[10px] font-mono text-indigo-400">
+                                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                <span>Uploading...</span>
+                              </div>
+                            )}
+                          </div>
 
                           {/* Preview container */}
                           <div className="space-y-1">
@@ -1379,6 +1395,25 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
                               </div>
                             )}
                           </div>
+                        </div>
+
+                        {/* Direct URL input fields matching Showcase Image style */}
+                        <div className="pt-1.5 border-t border-slate-900/80">
+                          <span className="text-[9.5px] text-slate-500 block mb-1 font-mono uppercase">Or paste manual image URL</span>
+                          <input
+                            type="url"
+                            name={fieldName}
+                            value={currentVal}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setProjectForm((prev) => ({
+                                ...prev,
+                                [fieldName]: val,
+                              }));
+                            }}
+                            placeholder="https://res.cloudinary.com/..."
+                            className="w-full bg-slate-900 border border-slate-850 py-2 px-3 text-xs font-mono outline-none rounded-xl text-slate-300 focus:border-indigo-500 placeholder-slate-600"
+                          />
                         </div>
                       </div>
                     );
