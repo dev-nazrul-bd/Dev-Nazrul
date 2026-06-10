@@ -1339,81 +1339,51 @@ export default function AdminPanel({ onAdminStateChange }: AdminPanelProps) {
                           )}
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
-                          {/* File upload prompt */}
-                          <div className="space-y-1.5">
-                            <label className="border border-dashed border-slate-800 hover:border-indigo-500/30 rounded-xl p-3 text-center cursor-pointer block bg-slate-900/40 hover:bg-slate-900 transition-all">
-                              <UploadCloud className="w-5 h-5 text-indigo-400 mx-auto mb-1" />
-                              <span className="text-[11px] text-slate-300 block font-bold">Upload screenshot {num}</span>
-                              <span className="text-[9px] text-indigo-400 block font-mono mt-0.5">Click to browse file</span>
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => handleScreenshotFileChange(idx, e)}
-                                disabled={isUploading}
-                                className="hidden"
-                              />
-                            </label>
+                        {/* Unified Interactive Screenshot Picker & Preview Card */}
+                        <div className="relative">
+                          <label className="relative border border-dashed border-slate-800 hover:border-indigo-500/40 rounded-xl p-4 text-center cursor-pointer block bg-slate-900/40 hover:bg-slate-900 transition-all h-36 flex flex-col items-center justify-center overflow-hidden group">
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={(e) => handleScreenshotFileChange(idx, e)}
+                              disabled={isUploading}
+                              className="hidden"
+                            />
                             
-                            {selectedFile && (
-                              <div className="text-[9px] text-indigo-300 font-mono flex items-center gap-1 bg-indigo-950/20 px-2 py-1 rounded border border-indigo-900/10">
-                                <Check className="w-2.5 h-2.5 text-emerald-400" />
-                                <span className="truncate">File: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)</span>
+                            {isUploading ? (
+                              <div className="flex flex-col items-center justify-center gap-2">
+                                <Loader2 className="w-6 h-6 animate-spin text-indigo-400" />
+                                <span className="text-xs text-indigo-300 font-mono">Uploading screenshot...</span>
                               </div>
-                            )}
-
-                            {isUploading && (
-                              <div className="flex items-center gap-1 text-[10px] font-mono text-indigo-400">
-                                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                                <span>Uploading...</span>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Preview container */}
-                          <div className="space-y-1">
-                            <label className="block text-[10px] font-mono tracking-wider text-slate-400 uppercase">
-                              Status & Preview
-                            </label>
-                            {currentVal ? (
-                              <div className="relative group rounded-xl overflow-hidden border border-slate-800 bg-slate-900 h-16 flex items-center justify-center">
+                            ) : currentVal ? (
+                              <>
                                 <img
                                   src={currentVal}
-                                  alt={`Screenshot ${num} preview`}
+                                  alt={`Screenshot ${num}`}
                                   referrerPolicy="no-referrer"
-                                  className="max-h-full max-w-full object-contain"
+                                  className="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-40 transition-all"
                                 />
-                                <div className="absolute inset-0 bg-slate-950/75 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all text-center p-1">
-                                  <span className="text-[8px] text-white font-mono uppercase bg-indigo-650 px-1.5 py-0.5 rounded">
-                                    {selectedFile ? "Pending Publish Upload" : "Active Preview"}
+                                <div className="absolute inset-0 bg-slate-950/45 group-hover:bg-slate-950/75 transition-all flex flex-col items-center justify-center p-3 text-center">
+                                  <UploadCloud className="w-6 h-6 text-indigo-200 mb-1 drop-shadow-md" />
+                                  <span className="text-xs text-white font-extrabold drop-shadow">Click to modify screenshot</span>
+                                  <span className="text-[9px] text-indigo-300 font-mono mt-1 bg-indigo-950/60 px-1.5 py-0.5 rounded border border-indigo-500/20">
+                                    Slot {num} Active
                                   </span>
+                                  {selectedFile && (
+                                    <span className="text-[8px] text-emerald-400 font-mono mt-1 bg-slate-950/95 px-1.5 py-0.5 rounded truncate max-w-[90%]">
+                                      {selectedFile.name}
+                                    </span>
+                                  )}
                                 </div>
-                              </div>
+                              </>
                             ) : (
-                              <div className="rounded-xl border border-dashed border-slate-800/80 bg-slate-900/20 h-16 flex items-center justify-center text-[10px] text-slate-500 font-mono">
-                                No asset selected
+                              <div className="flex flex-col items-center justify-center p-3">
+                                <UploadCloud className="w-7 h-7 text-indigo-400 mb-1.5" />
+                                <span className="text-[11px] text-slate-300 font-bold block">Upload screenshot {num}</span>
+                                <span className="text-[9px] text-indigo-400 font-mono mt-0.5">Click to browse file</span>
                               </div>
                             )}
-                          </div>
-                        </div>
-
-                        {/* Direct URL input fields matching Showcase Image style */}
-                        <div className="pt-1.5 border-t border-slate-900/80">
-                          <span className="text-[9.5px] text-slate-500 block mb-1 font-mono uppercase">Or paste manual image URL</span>
-                          <input
-                            type="url"
-                            name={fieldName}
-                            value={currentVal}
-                            onChange={(e) => {
-                              const val = e.target.value;
-                              setProjectForm((prev) => ({
-                                ...prev,
-                                [fieldName]: val,
-                              }));
-                            }}
-                            placeholder="https://res.cloudinary.com/..."
-                            className="w-full bg-slate-900 border border-slate-850 py-2 px-3 text-xs font-mono outline-none rounded-xl text-slate-300 focus:border-indigo-500 placeholder-slate-600"
-                          />
+                          </label>
                         </div>
                       </div>
                     );
