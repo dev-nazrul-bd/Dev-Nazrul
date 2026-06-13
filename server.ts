@@ -57,6 +57,19 @@ async function bootstrap() {
 
   app.use(express.json());
 
+  // Explicit route for personal sports TV stream page
+  app.get(["/tv", "/tv/", "/tv/index.html"], (req, res) => {
+    const tvPath = process.env.NODE_ENV !== "production"
+      ? path.join(process.cwd(), "public", "tv", "index.html")
+      : path.join(process.cwd(), "dist", "tv", "index.html");
+    
+    if (fs.existsSync(tvPath)) {
+      res.sendFile(tvPath);
+    } else {
+      res.status(404).send("TV Stream file not found on server.");
+    }
+  });
+
   // Secure API endpoint for Dev Nazrul AI Assistant proxying to Gemini
   app.post("/api/chat", async (req, res) => {
     try {
